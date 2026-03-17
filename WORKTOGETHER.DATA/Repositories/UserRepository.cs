@@ -17,6 +17,23 @@ namespace WORKTOGETHER.DATA.Repositories
                 .Where(u => u.Actif == 1 && u.Roles.Contains("ROLE_CLIENTE"))
                 .ToList();
         }
+
+        // Recherche d'utilisateurs actifs par rôle 
+        public List<User> FindByRole(string role)
+        {
+            return table
+                .Where(u => u.Actif == 1 && u.Roles.Contains(role))
+                .ToList();
+        }
+
+        // lister tous les utilisateurs actifs
+        public List<User> FindAll()
+        {
+            return table
+                .Where(u => u.Actif == 1)
+                .ToList();
+        }
+
     }
 
 }
