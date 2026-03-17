@@ -23,8 +23,8 @@
                 <DataGridTextColumn Header="Prénom" Binding="{Binding Prenom}" Width="150"/>
                 <DataGridTextColumn Header="Nom" Binding="{Binding Nom}" Width="200"/>
                 <DataGridTextColumn Header="Email" Binding="{Binding Email}" Width="150"/>
-                <DataGridTextColumn Header="Role" Binding="{Binding Roles}" Width="150"/>
-                <DataGridTextColumn Header="Active" Binding="{Binding IsActif}" Width="150"/>
+                <DataGridTextColumn Header="Role" Binding="{Binding RoleLabel}" Width="150"/>
+                <DataGridTextColumn Header="Active" Binding="{Binding ActifLabel}" Width="150"/>
             </DataGrid.Columns>
         </DataGrid>
     </Grid>
