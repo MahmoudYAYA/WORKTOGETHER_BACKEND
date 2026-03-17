@@ -1,0 +1,50 @@
+﻿<Window x:Class="WORKTOGETHER.WPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="WorkTogether - Administration" Height="600" Width="900"
+        WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+        <Style x:Key="MenuButton" TargetType="Button">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Padding" Value="20,12"/>
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#2d2d5e"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="220"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Grid.Column="0" Background="#1a1a2e">
+            <TextBlock Text="WorkTogether" FontSize="18" FontWeight="Bold"
+                       Foreground="White" Margin="20,30,20,10"
+                       HorizontalAlignment="Center"/>
+            <TextBlock x:Name="TxtUsername" FontSize="12"
+                       Foreground="#aaaaaa" Margin="20,0,20,30"
+                       HorizontalAlignment="Center"/>
+            <Separator Background="#333"/>
+            <Button Content="  Utilisateurs" Style="{StaticResource MenuButton}" Click="BtnUsers_Click"/>
+            <Button Content="  Unités" Style="{StaticResource MenuButton}" Click="BtnUnites_Click"/>
+            <Button Content="  Baies" Style="{StaticResource MenuButton}" Click="BtnBaies_Click"/>
+            <Button Content="  Commandes" Style="{StaticResource MenuButton}" Click="BtnCommandes_Click"/>
+            <Button Content=" Tickets" Style="{StaticResource MenuButton}" Click="BtnTickets_Click"/>
+            <Button Content="  Interventions" Style="{StaticResource MenuButton}" Click="BtnInterventions_Click"/>
+            <Separator Background="#333" Margin="0,20,0,0"/>
+            <Button Content="  Déconnexion" Style="{StaticResource MenuButton}" Click="BtnDeconnexion_Click"/>
+        </StackPanel>
+
+        <Frame Grid.Column="1" x:Name="MainFrame" NavigationUIVisibility="Hidden"/>
+    </Grid>
+</Window>
