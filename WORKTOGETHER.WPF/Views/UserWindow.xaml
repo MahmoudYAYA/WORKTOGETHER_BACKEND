@@ -20,11 +20,11 @@
                   IsReadOnly="True"
                   AlternatingRowBackground="LightGray">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Prénom" Binding="{Binding prenom}" Width="150"/>
-                <DataGridTextColumn Header="Nom" Binding="{Binding nom}" Width="200"/>
-                <DataGridTextColumn Header="Email" Binding="{Binding email}" Width="150"/>
-                <DataGridTextColumn Header="Role" Binding="{Binding roles}" Width="150"/>
-                <DataGridTextColumn Header="Active" Binding="{Binding is_actif}" Width="150"/>
+                <DataGridTextColumn Header="Prénom" Binding="{Binding Prenom}" Width="150"/>
+                <DataGridTextColumn Header="Nom" Binding="{Binding Nom}" Width="200"/>
+                <DataGridTextColumn Header="Email" Binding="{Binding Email}" Width="150"/>
+                <DataGridTextColumn Header="Role" Binding="{Binding Roles}" Width="150"/>
+                <DataGridTextColumn Header="Active" Binding="{Binding IsActif}" Width="150"/>
             </DataGrid.Columns>
         </DataGrid>
     </Grid>
