@@ -41,5 +41,9 @@ namespace WORKTOGETHER.DATA.Repositories
                 .Where(c => c.StatutPaiement == "paye")
                 .ToList();
         }
+
+        // FINDALL 
+       
+
     }
 }

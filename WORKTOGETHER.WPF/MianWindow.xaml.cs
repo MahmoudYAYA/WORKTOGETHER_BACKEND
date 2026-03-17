@@ -17,7 +17,7 @@ namespace WORKTOGETHER.WPF
 
         private void BtnUsers_Click(object sender, RoutedEventArgs e)
         {
-            new UnitesWindow().Show();
+            new UserWindow().Show();
         }
 
         private void BtnUnites_Click(object sender, RoutedEventArgs e)
