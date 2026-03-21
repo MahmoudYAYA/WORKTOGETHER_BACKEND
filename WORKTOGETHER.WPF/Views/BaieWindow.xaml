@@ -21,7 +21,9 @@
                   AlternatingRowBackground="LightGray">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Numéro" Binding="{Binding NumeroBaie}" Width="150"/>
-                <DataGridTextColumn Header="Capacité totale" Binding="{Binding CapaciteTotal}" Width="150"/>
+                <DataGridTextColumn Header="Capacité totale" Binding="{Binding CapaciteTotale}" Width="150"/>
+                <DataGridTextColumn Header="Unités occupées" Binding="{Binding NbUnitesOccupees}" Width="150"/>
+                <DataGridTextColumn Header="Unités disponibles" Binding="{Binding NbUnitesDisponibles}" Width="150"/>
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

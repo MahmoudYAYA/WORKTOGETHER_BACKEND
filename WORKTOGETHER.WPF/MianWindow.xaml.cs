@@ -42,12 +42,18 @@ namespace WORKTOGETHER.WPF
 
         private void BtnInterventions_Click(object sender, RoutedEventArgs e)
         {
+            new InterventionsWindow().ShowDialog();
         }
 
         private void BtnDeconnexion_Click(object sender, RoutedEventArgs e)
         {
             new LoginWindow().Show();
             this.Close();
+        }
+
+        private void BtnDashboard_Click(object sender, RoutedEventArgs e)
+        {
+            new DashboardWindow().ShowDialog();
         }
     }
 }

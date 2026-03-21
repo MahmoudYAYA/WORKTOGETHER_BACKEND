@@ -32,17 +32,22 @@
                        Foreground="White" Margin="20,30,20,10"
                        HorizontalAlignment="Center"/>
             <TextBlock x:Name="TxtUsername" FontSize="12"
-                       Foreground="#aaaaaa" Margin="20,0,20,30"
+                       Foreground="#aaaaaa" Margin="20,0,20,20"
                        HorizontalAlignment="Center"/>
+
             <Separator Background="#333"/>
-            <Button Content="  Utilisateurs" Style="{StaticResource MenuButton}" Click="BtnUsers_Click"/>
-            <Button Content="  Unités" Style="{StaticResource MenuButton}" Click="BtnUnites_Click"/>
-            <Button Content="  Baies" Style="{StaticResource MenuButton}" Click="BtnBaies_Click"/>
-            <Button Content="  Commandes" Style="{StaticResource MenuButton}" Click="BtnCommandes_Click"/>
-            <Button Content=" Tickets" Style="{StaticResource MenuButton}" Click="BtnTickets_Click"/>
-            <Button Content="  Interventions" Style="{StaticResource MenuButton}" Click="BtnInterventions_Click"/>
+
+            <Button Content="🏠  Dashboard" Style="{StaticResource MenuButton}" Click="BtnDashboard_Click"/>
+            <Button Content="👥  Utilisateurs" Style="{StaticResource MenuButton}" Click="BtnUsers_Click"/>
+            <Button Content="🖥️  Unités" Style="{StaticResource MenuButton}" Click="BtnUnites_Click"/>
+            <Button Content="📦  Baies" Style="{StaticResource MenuButton}" Click="BtnBaies_Click"/>
+            <Button Content="🛒  Commandes" Style="{StaticResource MenuButton}" Click="BtnCommandes_Click"/>
+            <Button Content="🎫  Tickets" Style="{StaticResource MenuButton}" Click="BtnTickets_Click"/>
+            <Button Content="🔧  Interventions" Style="{StaticResource MenuButton}" Click="BtnInterventions_Click"/>
+
             <Separator Background="#333" Margin="0,20,0,0"/>
-            <Button Content="  Déconnexion" Style="{StaticResource MenuButton}" Click="BtnDeconnexion_Click"/>
+
+            <Button Content="🚪  Déconnexion" Style="{StaticResource MenuButton}" Click="BtnDeconnexion_Click"/>
         </StackPanel>
 
         <Frame Grid.Column="1" x:Name="MainFrame" NavigationUIVisibility="Hidden"/>
