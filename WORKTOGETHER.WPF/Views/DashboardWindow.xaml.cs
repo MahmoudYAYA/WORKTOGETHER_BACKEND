@@ -1,16 +1,18 @@
 ﻿using System.Windows;
+using System.Windows.Controls;
+using System.Linq;
 using WORKTOGETHER.DATA.Repositories;
 
 namespace WORKTOGETHER.WPF.Views
 {
-    public partial class DashboardWindow : Window
+    public partial class DashboardPage : Page
     {
         private readonly UserRepository _userRepo = new UserRepository();
         private readonly BaieRepository _baieRepo = new BaieRepository();
         private readonly CommandeRepository _commandeRepo = new CommandeRepository();
         private readonly TicketSupportRepository _ticketRepo = new TicketSupportRepository();
 
-        public DashboardWindow()
+        public DashboardPage()
         {
             InitializeComponent();
             ChargerStatistiques();

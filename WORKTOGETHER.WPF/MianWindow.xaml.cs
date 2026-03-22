@@ -13,6 +13,8 @@ namespace WORKTOGETHER.WPF
             InitializeComponent();
             _currentUser = user;
             TxtUsername.Text = user.Prenom + " " + user.Nom;
+            // pour afficher le dashbord des statistiques lors de connexion 
+            MainFrame.Navigate(new DashboardPage());
         }
 
         private void BtnUsers_Click(object sender, RoutedEventArgs e)
@@ -53,7 +55,7 @@ namespace WORKTOGETHER.WPF
 
         private void BtnDashboard_Click(object sender, RoutedEventArgs e)
         {
-            new DashboardWindow().ShowDialog();
+            MainFrame.Navigate(new DashboardPage());
         }
     }
 }

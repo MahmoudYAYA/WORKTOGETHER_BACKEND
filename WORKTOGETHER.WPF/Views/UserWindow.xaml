@@ -27,5 +27,7 @@
                 <DataGridTextColumn Header="Active" Binding="{Binding ActifLabel}" Width="150"/>
             </DataGrid.Columns>
         </DataGrid>
+        
     </Grid>
+    
 </Window>
