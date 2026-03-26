@@ -23,4 +23,8 @@
     <ProjectReference Include="..\WORKTOGETHER.DATA\WORKTOGETHER.DATA.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="_core\" />
+  </ItemGroup>
+
 </Project>

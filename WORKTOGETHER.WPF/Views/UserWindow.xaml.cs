@@ -155,6 +155,9 @@ namespace WORKTOGETHER.WPF.Views
                 ChargerUsers();
             }
         }
+
+        // commit pour l'ancien structure 
+
     }
 
 }
