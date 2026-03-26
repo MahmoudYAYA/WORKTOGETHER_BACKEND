@@ -21,7 +21,7 @@
                    FontWeight="Bold"
                    Margin="0,0,0,15"/>
 
-        <!-- ✅ Bouton (BON ENDROIT) -->
+        <!-- Bouton Ajouter -->
         <Button Grid.Row="1"
                 Content="➕ Nouvel utilisateur"
                 HorizontalAlignment="Right"
@@ -36,38 +36,57 @@
                   x:Name="DgUtilisateurs"
                   AutoGenerateColumns="False"
                   IsReadOnly="True"
-                  AlternatingRowBackground="LightGray">
+                  AlternatingRowBackground="LightGray"
+                  ColumnWidth="*"
+                  HorizontalScrollBarVisibility="Disabled">
 
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Prénom" Binding="{Binding Prenom}" Width="150"/>
-                <DataGridTextColumn Header="Nom" Binding="{Binding Nom}" Width="200"/>
-                <DataGridTextColumn Header="Email" Binding="{Binding Email}" Width="150"/>
-                <DataGridTextColumn Header="Role" Binding="{Binding RoleLabel}" Width="150"/>
-                <DataGridTextColumn Header="Active" Binding="{Binding ActifLabel}" Width="150"/>
-                <DataGridTemplateColumn Header="Actions" Width="220">
+
+                <DataGridTextColumn Header="Prénom" Binding="{Binding Prenom}" Width="1*"/>
+                <DataGridTextColumn Header="Nom" Binding="{Binding Nom}" Width="1*"/>
+                <DataGridTextColumn Header="Email" Binding="{Binding Email}" Width="2*"/>
+                <DataGridTextColumn Header="Role" Binding="{Binding RoleLabel}" Width="1*"/>
+                <DataGridTextColumn Header="Active" Binding="{Binding ActifLabel}" Width="1*"/>
+
+                <!-- Actions -->
+                <DataGridTemplateColumn Header="Actions" Width="2*">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <!-- Bouton Toggle -->
                             <StackPanel Orientation="Horizontal">
-                                <Button Content="{Binding ActifLabel}"
-                        Click="BtnToggle_Click"
-                        Tag="{Binding Id}"
-                        Padding="8,4" Margin="2"/>
 
-                                <!-- Bouton Supprimer -->
-                                <Button Content="🗑️ Supprimer"
-                        Click="BtnSupprimer_Click"
-                        Tag="{Binding Id}"
-                        Padding="8,4" Margin="2"
-                        Background="#922B21"
-                        Foreground="White"/>
+                                <!-- Toggle Actif -->
+                                <Button Content="{Binding ActifLabel}"
+                                        Click="BtnToggle_Click"
+                                        Tag="{Binding Id}"
+                                        Padding="6,3"
+                                        Margin="2"/>
+
+                                <!-- Modifier -->
+                                <Button Content="✏️"
+                                        Click="BtnModifier_Click"
+                                        Tag="{Binding Id}"
+                                        Padding="6,3"
+                                        Margin="2"
+                                        Background="#2C3E7A"
+                                        Foreground="White"/>
+
+                                <!-- Supprimer -->
+                                <Button Content="🗑️"
+                                        Click="BtnSupprimer_Click"
+                                        Tag="{Binding Id}"
+                                        Padding="6,3"
+                                        Margin="2"
+                                        Background="#922B21"
+                                        Foreground="White"/>
+
                             </StackPanel>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
+
             </DataGrid.Columns>
 
         </DataGrid>
-    
+
     </Grid>
 </Window>

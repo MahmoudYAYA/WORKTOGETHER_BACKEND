@@ -30,8 +30,18 @@ namespace WORKTOGETHER.DATA.Repositories
         public List<User> FindAll()
         {
             return table
-                .Where(u => u.Actif == 1)
                 .ToList();
+        }
+
+        public void ToggleActif(int id)
+        {
+            using var ctx = new WorktogetherContext();
+            var user = ctx.Users.Find(id);
+            if (user != null)
+            {
+                user.Actif = user.Actif == 1 ? (sbyte)0 : (sbyte)1;
+                ctx.SaveChanges();
+            }
         }
 
     }
