@@ -43,36 +43,117 @@ namespace WORKTOGETHER.WPF.Views
         }
 
         // methode pour surpprimer un utilisateur 
-        public void BtnSupprimer_Click(object sender, RoutedEventArgs e)
+        private void BtnSupprimer_Click(object sender, RoutedEventArgs e)
         {
             var btn = sender as Button;
             int userId = (int)btn.Tag;
 
-            // confirmation 
-            var result = MessageBox.Show("Voulez vous vraiment supprimer cet utilisateur ?", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            // Vérifie les tickets ouverts
+            var ticketRepo = new TicketSupportRepository();
+            var ticketsOuverts = ticketRepo.FindByClient(userId)
+                .Where(t => t.DateFermeture == null)
+                .ToList();
 
-            if (result == MessageBoxResult.Yes) {
+            // Vérifie les commandes en attente
+            var commandeRepo = new CommandeRepository();
+            var commandesEnAttente = commandeRepo.FindByClient(userId)
+                .Where(c => c.StatutPaiement == "en_attente")
+                .ToList();
+
+            // Bloque si des éléments en cours
+            if (ticketsOuverts.Count > 0 || commandesEnAttente.Count > 0)
+            {
+                string message = "Impossible de supprimer cet utilisateur !\n\n";
+
+                if (ticketsOuverts.Count > 0)
+                    message += $" {ticketsOuverts.Count} ticket(s) ouvert(s)\n";
+
+                if (commandesEnAttente.Count > 0)
+                    message += $" {commandesEnAttente.Count} commande(s) en attente\n";
+
+                message += "\nRéglez ces éléments avant de supprimer.";
+
+                MessageBox.Show(message, "Suppression impossible",
+                                MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
+            // Confirmation
+            var result = MessageBox.Show(
+                "Voulez-vous vraiment supprimer cet utilisateur ?",
+                "Confirmation",
+                MessageBoxButton.YesNo,
+                MessageBoxImage.Question);
+
+            if (result == MessageBoxResult.Yes)
+            {
                 _repository.Delete(userId);
                 ChargerUsers();
-                MessageBox.Show("Utilisateur supprimé ", "Succès",
-                    MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show("Utilisateur supprimé !", "Succès",
+                                MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
 
+        // une methode pour supprimer les relation d'abord si l'utilisateur à quelque chose en coure (commande, Ticket, ) pour pouvoir,  supprimer 
+        //private void BtnSupprimer_Click(object sender, RoutedEventArgs e)
+        //{
+        //    var btn = sender as Button;
+        //    int userId = (int)btn.Tag;
+
+        //    var result = MessageBox.Show(
+        //        "Voulez-vous vraiment supprimer cet utilisateur et toutes ses données ?",
+        //        "Confirmation",
+        //        MessageBoxButton.YesNo,
+        //        MessageBoxImage.Question);
+
+        //    if (result == MessageBoxResult.Yes)
+        //    {
+        //        // Supprime d'abord les tickets
+        //        var ticketRepo = new TicketSupportRepository();
+        //        var tickets = ticketRepo.FindByClient(userId);
+        //        foreach (var ticket in tickets)
+        //            ticketRepo.Delete(ticket.Id);
+
+        //        // Supprime les commandes
+        //        var commandeRepo = new CommandeRepository();
+        //        var commandes = commandeRepo.FindByClient(userId);
+        //        foreach (var commande in commandes)
+        //            commandeRepo.Delete(commande.Id);
+
+        //        // Supprime l'utilisateur
+        //        _repository.Delete(userId);
+
+        //        ChargerUsers();
+        //        MessageBox.Show("Utilisateur supprimé !", "Succès",
+        //                        MessageBoxButton.OK, MessageBoxImage.Information);
+        //    }
+        //}
         // une methode pour acitver ou désactiver le utilisateur 
-        public void BtnToggle_Click(object sender, RoutedEventArgs e)
+        private void BtnToggle_Click(object sender, RoutedEventArgs e)
+        {
+            var btn = sender as Button;
+            int userId = (int)btn.Tag;
+
+            _repository.ToggleActif(userId);
+            ChargerUsers();
+
+            MessageBox.Show("Utilisateur modifié !", "Succès",
+                            MessageBoxButton.OK, MessageBoxImage.Information);
+        }
+
+        // une methode pour modifier 
+        private void BtnModifier_Click(object sender, RoutedEventArgs e)
         {
             var btn = sender as Button;
             int userId = (int)btn.Tag;
 
             var user = _repository.FindById(userId);
+            var fenetre = new ModifierUserWindow(user);
 
-            // inverser les champs actif et inactif 
-            user.Actif = user.Actif == 1 ? (sbyte)0 : (sbyte)1;
-            _repository.Update(user);
-            ChargerUsers();
-            MessageBox.Show("Utilisateur modifier", "Succès", MessageBoxButton.OK, MessageBoxImage.Information);
-
+            if (fenetre.ShowDialog() == true)
+            {
+                ChargerUsers();
+            }
         }
     }
 
