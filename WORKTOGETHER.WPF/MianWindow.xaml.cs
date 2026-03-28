@@ -5,7 +5,8 @@ using WORKTOGETHER.WPF.Commandes;
 using WORKTOGETHER.WPF.Interventions;
 using WORKTOGETHER.WPF.Tickets;
 using WORKTOGETHER.WPF.Users;
-using WORKTOGETHER.WPF.Views;
+using WORKTOGETHER.WPF.Dashboard;
+using WORKTOGETHER.WPF.Offres;
 
 namespace WORKTOGETHER.WPF
 {
@@ -18,8 +19,6 @@ namespace WORKTOGETHER.WPF
             InitializeComponent();
             _currentUser = user;
             TxtUsername.Text = user.Prenom + " " + user.Nom;
-
-            // ← Affiche le dashboard par défaut
             MainFrame.Navigate(new DashboardPage());
         }
 
@@ -53,14 +52,20 @@ namespace WORKTOGETHER.WPF
             MainFrame.Navigate(new InterventionPage());
         }
 
+        private void BtnOffres_Click(object sender, RoutedEventArgs e)
+        {
+            MainFrame.Navigate(new OffrePage());
+        }
         private void BtnUnites_Click(object sender, RoutedEventArgs e)
         {
-            // On fera UnitePage après
+            // UnitePage à faire
         }
 
         private void BtnDeconnexion_Click(object sender, RoutedEventArgs e)
         {
-            new LoginWindow().Show();
+            // LoginWindow est dans le namespace principal
+            var login = new LoginWindow();
+            login.Show();
             this.Close();
         }
     }
