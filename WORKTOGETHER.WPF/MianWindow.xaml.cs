@@ -8,8 +8,7 @@ using WORKTOGETHER.WPF.Offres;
 using WORKTOGETHER.WPF.Reservations;
 using WORKTOGETHER.WPF.Tickets;
 using WORKTOGETHER.WPF.Users;
-using WORKTOGETHER.WPF.Reservations;
-
+using WORKTOGETHER.WPF.Unites; 
 
 namespace WORKTOGETHER.WPF
 {
@@ -61,8 +60,9 @@ namespace WORKTOGETHER.WPF
         }
         private void BtnUnites_Click(object sender, RoutedEventArgs e)
         {
-            // UnitePage à faire
+            MainFrame.Navigate(new UnitePage());    
         }
+
 
         // une button pour les reservation 
 

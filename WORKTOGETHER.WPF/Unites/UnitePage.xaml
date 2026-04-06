@@ -1,0 +1,140 @@
+﻿<Page x:Class="WORKTOGETHER.WPF.Unites.UnitePage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      Title="Unités">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- En-tête -->
+        <Border Grid.Row="0" Background="#2C3E7A" Padding="15,10">
+            <TextBlock Text="UNITÉS" Foreground="White"
+                       FontSize="14" FontWeight="Bold"/>
+        </Border>
+
+        <!-- Contenu -->
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="320"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- ══════════════ LISTE ══════════════ -->
+            <Grid Grid.Column="0" Margin="15">
+                <!-- Tableau -->
+                <DataGrid x:Name="DgUnites"
+                          AutoGenerateColumns="False"
+                          IsReadOnly="True"
+                          CanUserAddRows="False"
+                          SelectionChanged="DgUnites_SelectionChanged"
+                          AlternatingRowBackground="#F5F5F5">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="NUMÉRO" Binding="{Binding NumeroUnite}" Width="100"/>
+                        <DataGridTextColumn Header="NOM" Binding="{Binding NomUnite}" Width="*"/>
+                        <DataGridTextColumn Header="ÉTAT" Binding="{Binding Etat}" Width="120"/>
+                        <DataGridTextColumn Header="STATUT" Binding="{Binding Statut}" Width="120"/>
+                        <DataGridTextColumn Header="BAIE" Binding="{Binding Baie.NumeroBaie}" Width="100"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
+
+            <!-- ══════════════ DÉTAIL + MODIFIER ÉTAT ══════════════ -->
+            <Border Grid.Column="1" Background="#F8F9FA"
+                    BorderBrush="#DDDDDD" BorderThickness="1,0,0,0">
+                <Grid Margin="20">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <!-- Titre -->
+                        <RowDefinition Height="*"/>
+                        <!-- Infos -->
+                        <RowDefinition Height="Auto"/>
+                        <!-- Bouton -->
+                    </Grid.RowDefinitions>
+
+                    <!-- Titre -->
+                    <Border Grid.Row="0" Background="#2C3E7A" Padding="10,8" Margin="0,0,0,20">
+                        <TextBlock Text="DÉTAIL UNITÉ"
+                                   Foreground="White" FontWeight="Bold"/>
+                    </Border>
+
+                    <!-- Infos + modifier état -->
+                    <StackPanel Grid.Row="1">
+
+                        <!-- Numéro -->
+                        <Grid Margin="0,0,0,12">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="100"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="Numéro :" FontWeight="Bold" VerticalAlignment="Center"/>
+                            <TextBlock Grid.Column="1" x:Name="TxtNumero" VerticalAlignment="Center"/>
+                        </Grid>
+
+                        <!-- Nom -->
+                        <Grid Margin="0,0,0,12">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="100"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="Nom :" FontWeight="Bold" VerticalAlignment="Center"/>
+                            <TextBlock Grid.Column="1" x:Name="TxtNom" VerticalAlignment="Center"/>
+                        </Grid>
+
+                        <!-- Baie -->
+                        <Grid Margin="0,0,0,12">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="100"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="Baie :" FontWeight="Bold" VerticalAlignment="Center"/>
+                            <TextBlock Grid.Column="1" x:Name="TxtBaie" VerticalAlignment="Center"/>
+                        </Grid>
+
+                        <!-- Statut -->
+                        <Grid Margin="0,0,0,12">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="100"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="Statut :" FontWeight="Bold" VerticalAlignment="Center"/>
+                            <TextBlock Grid.Column="1" x:Name="TxtStatut" VerticalAlignment="Center"/>
+                        </Grid>
+
+                        <!-- Réservation -->
+                        <Grid Margin="0,0,0,20">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="100"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="Client :" FontWeight="Bold" VerticalAlignment="Center"/>
+                            <TextBlock Grid.Column="1" x:Name="TxtClient" VerticalAlignment="Center"/>
+                        </Grid>
+
+                        <Separator Margin="0,0,0,20"/>
+
+                        <!-- Modifier l'état -->
+                        <TextBlock Text="Modifier l'état :" FontWeight="Bold" Margin="0,0,0,8"/>
+                        <ComboBox x:Name="CmbEtat" Padding="6,4" Margin="0,0,0,10">
+                            <ComboBoxItem Content="✅ OK"          Tag="OK"/>
+                            <ComboBoxItem Content="⚠️ Incident"   Tag="incident"/>
+                            <ComboBoxItem Content="🔧 Maintenance" Tag="maintenance"/>
+                        </ComboBox>
+
+                        <!-- Message erreur -->
+                        <TextBlock x:Name="TxtErreur" Foreground="Red"
+                                   TextWrapping="Wrap" Visibility="Collapsed"/>
+                    </StackPanel>
+
+                    <!-- Bouton Enregistrer -->
+                    <Button Grid.Row="2" Content="💾 ENREGISTRER L'ÉTAT"
+                            Padding="12,8" Background="#2C3E7A"
+                            Foreground="White" BorderThickness="0"
+                            Click="BtnEnregistrer_Click"/>
+                </Grid>
+            </Border>
+        </Grid>
+    </Grid>
+</Page>

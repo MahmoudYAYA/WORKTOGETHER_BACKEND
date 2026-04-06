@@ -23,5 +23,14 @@ namespace WORKTOGETHER.DATA.Repositories
 				.Where(u => u.BaieId == baieId)
 				.ToList();
 		}
-	}
+
+		public List<Unite> FindAllWithDetails()
+		{
+			return table
+				.Include(u => u.Baie)
+				.Include(u => u.Reservation)
+					.ThenInclude(u => u.Client)
+				.ToList();
+        }
+    }
 }
