@@ -8,11 +8,9 @@ public partial class Baie
     public int Id { get; set; }
 
     public string NumeroBaie { get; set; } = null!;
- 
-
 
     public int CapaciteTotale { get; set; }
-    // helper pour NbUnitesOccupees
+
     public int NbUnitesOccupees => Unites.Count(u => u.Statut == "occupe");
     public int NbUnitesDisponibles => Unites.Count(u => u.Statut == "disponible");
 
