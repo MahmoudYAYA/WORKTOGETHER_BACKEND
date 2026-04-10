@@ -11,7 +11,6 @@ using WORKTOGETHER.WPF.Unites;
 using WORKTOGETHER.WPF.Users;
 using WORKTOGETHER.WPF.Rapports;
 
-
 namespace WORKTOGETHER.WPF
 {
     public partial class MainWindow : Window
@@ -34,6 +33,10 @@ namespace WORKTOGETHER.WPF
         private void BtnRapports_Click(object sender, RoutedEventArgs e)
         {
             MainFrame.Navigate(new RapportPage());
+        }
+        private void BtnOccupation_Click(object sender, RoutedEventArgs e)
+        {
+            MainFrame.Navigate(new OccupationPage());
         }
         private void BtnUsers_Click(object sender, RoutedEventArgs e)
         {
