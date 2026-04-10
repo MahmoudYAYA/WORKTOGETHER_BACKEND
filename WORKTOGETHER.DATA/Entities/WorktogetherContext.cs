@@ -38,7 +38,7 @@ public partial class WorktogetherContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseMySql("server=localhost;database=worktogether;uid=root;port=3306", Microsoft.EntityFrameworkCore.ServerVersion.Parse("8.3.0-mysql"));
+        => optionsBuilder.UseMySql("server=localhost;database=worktogether;uid=root", Microsoft.EntityFrameworkCore.ServerVersion.Parse("8.3.0-mysql"));
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -81,6 +81,9 @@ public partial class WorktogetherContext : DbContext
                 .HasColumnType("datetime")
                 .HasColumnName("date_commande");
             entity.Property(e => e.DateDebutService).HasColumnName("date_debut_service");
+            entity.Property(e => e.DateFinRetractation)
+                .HasColumnType("datetime")
+                .HasColumnName("date_fin_retractation");
             entity.Property(e => e.DateFinService).HasColumnName("date_fin_service");
             entity.Property(e => e.MontantTotal)
                 .HasPrecision(10, 2)
@@ -300,9 +303,15 @@ public partial class WorktogetherContext : DbContext
 
             entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.BaieId).HasColumnName("baie_id");
+            entity.Property(e => e.Couleur)
+                .HasMaxLength(7)
+                .HasColumnName("couleur");
             entity.Property(e => e.Etat)
                 .HasMaxLength(255)
                 .HasColumnName("etat");
+            entity.Property(e => e.NomPersonnalise)
+                .HasMaxLength(255)
+                .HasColumnName("nom_personnalise");
             entity.Property(e => e.NomUnite)
                 .HasMaxLength(255)
                 .HasColumnName("nom_unite");
@@ -313,6 +322,9 @@ public partial class WorktogetherContext : DbContext
             entity.Property(e => e.Statut)
                 .HasMaxLength(255)
                 .HasColumnName("statut");
+            entity.Property(e => e.TypeUnite)
+                .HasMaxLength(50)
+                .HasColumnName("type_unite");
 
             entity.HasOne(d => d.Baie).WithMany(p => p.Unites)
                 .HasForeignKey(d => d.BaieId)
