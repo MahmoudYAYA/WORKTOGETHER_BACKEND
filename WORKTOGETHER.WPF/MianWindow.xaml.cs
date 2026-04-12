@@ -22,9 +22,19 @@ namespace WORKTOGETHER.WPF
             InitializeComponent();
             _currentUser = user;
             TxtUsername.Text = user.Prenom + " " + user.Nom;
+
+            // ← Cache les menus admin si comptable
+            if (user.Roles.Contains("ROLE_COMPTABLE"))
+            {
+                BtnUsers.Visibility = Visibility.Collapsed;
+                BtnBaies.Visibility = Visibility.Collapsed;
+                BtnInterventions.Visibility = Visibility.Collapsed;
+                BtnOffres.Visibility = Visibility.Collapsed;
+                BtnUnites.Visibility = Visibility.Collapsed;
+            }
+
             MainFrame.Navigate(new DashboardPage());
         }
-
         private void BtnDashboard_Click(object sender, RoutedEventArgs e)
         {
             MainFrame.Navigate(new DashboardPage());
