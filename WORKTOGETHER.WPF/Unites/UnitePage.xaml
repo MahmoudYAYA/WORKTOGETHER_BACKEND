@@ -41,7 +41,7 @@
                 </DataGrid>
             </Grid>
 
-            <!-- ══════════════ DÉTAIL + MODIFIER ÉTAT ══════════════ -->
+           
             <Border Grid.Column="1" Background="#F8F9FA"
                     BorderBrush="#DDDDDD" BorderThickness="1,0,0,0">
                 <Grid Margin="20">
