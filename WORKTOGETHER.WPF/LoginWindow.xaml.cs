@@ -1,40 +1,64 @@
 ﻿using System.Windows;
 using WORKTOGETHER.DATA.Repositories;
+using BCrypt.Net;
+using WORKTOGETHER.DATA.Entities;
 
 namespace WORKTOGETHER.WPF
 {
     public partial class LoginWindow : Window
     {
+        private UserRepository _userRepo = new UserRepository();
+
         public LoginWindow()
         {
             InitializeComponent();
         }
 
-        private void BtnLogin_Click(object sender, RoutedEventArgs e)
+        private void btnConnexion_Click(object sender, RoutedEventArgs e)
         {
-            var userRepo = new UserRepository();
-            var user = userRepo.FindByEmail(TxtEmail.Text);
+            string email = txtEmail.Text.Trim();
+            string password = txtPassword.Password;
 
-            // Vérifie que l'utilisateur existe et est actif
-            if (user == null || user.Actif == 0)
+            // Validation basique
+            if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password))
             {
-                TxtErreur.Text = "Utilisateur introuvable ou inactif !";
-                TxtErreur.Visibility = Visibility.Visible;
+                AfficherErreur("Veuillez remplir tous les champs !");
                 return;
             }
 
-            // Vérifie que c'est bien un admin
-            if (!user.Roles.Contains("ROLE_ADMIN") && !user.Roles.Contains("ROLE_COMPTABLE"))
+            // Vérifie si l'email contient un @
+            var user = _userRepo.FindByEmail(email);
+            if (!email.Contains("@"))
             {
-                TxtErreur.Text = "Accès refusé ! Seuls les administrateurs et comptables peuvent se connecter.";
-                TxtErreur.Visibility = Visibility.Visible;
+                AfficherErreur("Veuillez entrer un email valide !");
+                return;
+            }
+            // Vérifie si l'utilisateur existe
+            if (user == null)
+            {
+                AfficherErreur("Une erreur se produit");
+                return;
+            }
+            // Vérifie le mot de passe bcrypt
+            bool passwordOk = BCrypt.Net.BCrypt.Verify(password, user.Password);
+
+            if (!passwordOk)
+            {
+                AfficherErreur("Email ou mot de passe incorrect !");
                 return;
             }
 
-            // Connexion réussie
-            MainWindow main = new MainWindow(user);
-            main.Show();
+            
+            // Connexion réussie → ouvre MainWindow
+            var mainWindow = new MainWindow(user);
+            mainWindow.Show();
             this.Close();
+        }
+
+        private void AfficherErreur(string message)
+        {
+            txtErreur.Text = message;
+            txtErreur.Visibility = Visibility.Visible;
         }
     }
 }

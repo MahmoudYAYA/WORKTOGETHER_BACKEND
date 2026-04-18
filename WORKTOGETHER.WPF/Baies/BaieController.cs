@@ -17,17 +17,22 @@ namespace WORKTOGETHER.WPF.Baies
             return _baieRepo.FindAllwithDetails();
         }
 
-        // ── Crée une baie + génère les unités automatiquement ──
+        // Crée une baie + génère les unités automatiquement 
         public (bool succes, string message) Creer(string numeroBaie, int capacite)
         {
             try
             {
                 // Validation
+                // le numéro de baie doit être unique est ne doit pas être vide
+                // Validation
                 if (string.IsNullOrEmpty(numeroBaie))
-                    return (false, "Le numéro de baie est obligatoire !");
+                    return (false, "Le numéro de baie est obligatoire");
 
-                if (capacite <= 0)
-                    return (false, "La capacité doit être supérieure à 0 !");
+                if (_baieRepo.FindByNumero(numeroBaie) != null)
+                    return (false, "Ce numéro de baie existe déjà");
+
+                if (capacite != 42)
+                    return (false, "La capacité doit être dois etre 42 unités");
 
                 // Crée la baie
                 var baie = new Baie
@@ -59,7 +64,7 @@ namespace WORKTOGETHER.WPF.Baies
             }
         }
 
-        // ── Supprime une baie ──
+        // Supprime une baie 
         public (bool succes, string message) Supprimer(int id)
         {
             try
@@ -71,11 +76,11 @@ namespace WORKTOGETHER.WPF.Baies
                 if (baie == null)
                     return (false, "Baie introuvable !");
 
-                // ← Vérifie les unités occupées
+                // Vérifie les unités occupées
                 if (baie.NbUnitesOccupees > 0)
                     return (false, $" {baie.NbUnitesOccupees} unités sont occupées !");
 
-                // ← Supprime (BaieRepository.Delete supprime les unités aussi)
+                // 
                 _baieRepo.Delete(id);
                 return (true, "Baie supprimée avec succès !");
             }
@@ -85,7 +90,7 @@ namespace WORKTOGETHER.WPF.Baies
             }
         }
 
-        // ── Valide les champs ──
+        //  Valide les champs 
         public List<string> Valider(string numeroBaie, string capacite)
         {
             var erreurs = new List<string>();

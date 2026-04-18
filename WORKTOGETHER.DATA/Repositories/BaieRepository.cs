@@ -36,11 +36,15 @@ namespace WORKTOGETHER.DATA.Repositories
                 .FirstOrDefault(b => b.Id == baieId);
 
             if (baie == null)
-                throw new Exception("Baie introuvable !");
+                throw new Exception("Baie introuvable ");
 
             return baie.CapaciteTotale - baie.Unites.Count;
         }
 
+        public Baie FindByNumero(string numero )
+        {
+            return table.FirstOrDefault(b => b.NumeroBaie == numero);
+        }
         
         /// <summary>
         /// Récupère toutes les baies avec leurs unités
