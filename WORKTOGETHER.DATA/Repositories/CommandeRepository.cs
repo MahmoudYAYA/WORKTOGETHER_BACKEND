@@ -49,9 +49,42 @@ namespace WORKTOGETHER.DATA.Repositories
                 .Include(c => c.Client)
                 .Include(c => c.Offre)
                 .ToList();
+        }
 
+        // Methode getAll 
+        public List<Commande> GetAll()
+        {
+            return table.ToList();
+        }
 
+        /// methode annuller on vérifie, puis annule la commande et on libre les unités associées
+        public void Annuler(int id)
+        {
+            using var ctx = new WorktogetherContext();
 
+            var commande = ctx.Commandes
+                .Include(c => c.Reservation)
+                    .ThenInclude(r => r.Unites) // les unités dans la réservation
+                .FirstOrDefault(c => c.Id == id);
+
+            if (commande == null)
+                throw new Exception("Commande introuvable !");
+
+            // Met le statut à annulé
+            commande.StatutPaiement = "annule";
+
+            // Libère les unités si réservation existe
+            if (commande.Reservation != null)
+            {
+                foreach (var unite in commande.Reservation.Unites)
+                {
+                    unite.Statut = "disponible";
+                    unite.ReservationId = null;
+                }
+                ctx.Reservations.Remove(commande.Reservation);
+            }
+
+            ctx.SaveChanges();
         }
     }
 }
