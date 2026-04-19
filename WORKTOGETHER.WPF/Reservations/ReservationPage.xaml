@@ -26,7 +26,7 @@
                 <!-- Détail -->
             </Grid.ColumnDefinitions>
 
-            <!-- ══════════════ LISTE ══════════════ -->
+        
             <Grid Grid.Column="0" Margin="15">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
@@ -35,7 +35,6 @@
                     <!-- DataGrid -->
                 </Grid.RowDefinitions>
 
-                <!-- Bouton annuler -->
                 <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,10">
                     <Button Content="ANNULER RÉSERVATION" Padding="12,6"
                             Background="#922B21" Foreground="White" BorderThickness="0"
@@ -59,7 +58,6 @@
                 </DataGrid>
             </Grid>
 
-            <!-- ══════════════ DÉTAIL ══════════════ -->
             <Border Grid.Column="1" Background="#F8F9FA"
                     BorderBrush="#DDDDDD" BorderThickness="1,0,0,0">
                 <Grid Margin="20">

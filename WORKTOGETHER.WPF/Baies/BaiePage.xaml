@@ -55,7 +55,7 @@
                 </DataGrid>
             </Grid>
 
-            <!-- ══════════════ FORMULAIRE ══════════════ -->
+           
             <Border Grid.Column="1" Background="#F8F9FA"
                     BorderBrush="#DDDDDD" BorderThickness="1,0,0,0">
                 <Grid Margin="20">
@@ -95,7 +95,7 @@
                         </Grid>
 
                         <!-- Info création unités -->
-                        <TextBlock Text="ℹ️ Les unités seront créées automatiquement"
+                        <TextBlock Text="Les unités seront créées automatiquement"
                                    Foreground="#5D6D7E" FontStyle="Italic"
                                    TextWrapping="Wrap" Margin="0,5,0,0"/>
 
