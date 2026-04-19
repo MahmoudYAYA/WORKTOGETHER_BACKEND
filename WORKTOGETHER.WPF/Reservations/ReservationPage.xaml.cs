@@ -36,17 +36,11 @@ namespace WORKTOGETHER.WPF.Reservations
             TxtDateDebut.Text = reservation.DateDebut.ToString("dd/MM/yyyy");
             TxtDateFin.Text = reservation.DateFin.ToString("dd/MM/yyyy");
             TxtPrixTotal.Text = reservation.PrixTotal + " €";
-            TxtNbUnites.Text = $"🖥️ {reservation.Unites.Count} unité(s)";
+            TxtNbUnites.Text = $"{reservation.Unites.Count} unité(s)";
             DgUnites.ItemsSource = reservation.Unites;
         }
 
-        // ← Si tu veux garder le bouton mais sans logique pour l'instant
-        private void BtnAnnuler_Click(object sender, RoutedEventArgs e)
-        {
-            // Non implémenté → annulation via CommandePage
-            MessageBox.Show("Pour annuler une réservation, annulez la commande correspondante.",
-                            "Information", MessageBoxButton.OK, MessageBoxImage.Information);
-        }
+      
         private void ViderDetail()
         {
             TxtClient.Text = "";

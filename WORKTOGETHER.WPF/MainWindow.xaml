@@ -38,8 +38,8 @@
             <Separator Background="#333"/>
             
             <Button Content="Dashboard" Style="{StaticResource MenuButton}" Click="BtnDashboard_Click"/>
-            <Button Content=" Rapports" Style="{StaticResource MenuButton}" Click="BtnRapports_Click"/>
-            <Button Content=" Occupation" Style="{StaticResource MenuButton}" Click="BtnOccupation_Click"/>
+            <Button Content="Rapports" Style="{StaticResource MenuButton}" Click="BtnRapports_Click"/>
+            <Button Content="Occupation" Style="{StaticResource MenuButton}" Click="BtnOccupation_Click"/>
         
             <Button x:Name="BtnUsers" Content="Utilisateurs" Style="{StaticResource MenuButton}" Click="BtnUsers_Click"/>
             <Button x:Name="BtnUnites" Content="Unités" Style="{StaticResource MenuButton}" Click="BtnUnites_Click"/>

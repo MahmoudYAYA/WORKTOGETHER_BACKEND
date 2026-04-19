@@ -9,20 +9,20 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <!-- En-tête -->
+   
         <Border Grid.Row="0" Background="#2C3E7A" Padding="15,10">
             <TextBlock Text="RÉSERVATIONS" Foreground="White"
                        FontSize="14" FontWeight="Bold"/>
         </Border>
 
-        <!-- Contenu : Liste + Détail -->
+        <!-- Contenu : Liste et less Détail -->
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="420"/>
             </Grid.ColumnDefinitions>
 
-            <!-- ══════════════ LISTE ══════════════ -->
+          
             <DataGrid Grid.Column="0" Margin="15"
                       x:Name="DgReservations"
                       AutoGenerateColumns="False"
@@ -39,7 +39,7 @@
                 </DataGrid.Columns>
             </DataGrid>
 
-            <!-- ══════════════ DÉTAIL ══════════════ -->
+   
             <Border Grid.Column="1" Background="#F8F9FA"
                     BorderBrush="#DDDDDD" BorderThickness="1,0,0,0">
                 <Grid Margin="20">
