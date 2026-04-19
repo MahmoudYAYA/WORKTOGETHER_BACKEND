@@ -31,6 +31,7 @@ namespace WORKTOGETHER.DATA.Repositories
             return ctx.Reservations
                 .Include(r => r.Client)
                 .Include(r => r.Offre)
+                .Include(r => r.Unites)
                 .ToList();
         }
     }
