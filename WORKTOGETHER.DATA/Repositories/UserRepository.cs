@@ -5,7 +5,7 @@ namespace WORKTOGETHER.DATA.Repositories
 {
     public class UserRepository : Repository<User>
     {
-        public User FindByEmail(string email )
+        public User FindByEmail(string email)
         {
             return table.FirstOrDefault(u => u.Email == email);
         }
