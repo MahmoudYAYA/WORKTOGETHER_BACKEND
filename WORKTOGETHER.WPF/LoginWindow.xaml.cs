@@ -2,6 +2,7 @@
 using WORKTOGETHER.DATA.Repositories;
 using BCrypt.Net;
 using WORKTOGETHER.DATA.Entities;
+using MySql.Data.MySqlClient;
 
 namespace WORKTOGETHER.WPF
 {
@@ -14,51 +15,45 @@ namespace WORKTOGETHER.WPF
             InitializeComponent();
         }
 
-        private void btnConnexion_Click(object sender, RoutedEventArgs e)
+        private void BtnConnexion_Click(object sender, RoutedEventArgs e)
         {
-            string email = txtEmail.Text.Trim();
-            string password = txtPassword.Password;
-
-            // Validation basique
-            if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password))
+            try
             {
-                AfficherErreur("Veuillez remplir tous les champs !");
-                return;
-            }
+                var userRepo = new UserRepository();
+                var user = userRepo.FindByEmail(TxtEmail.Text);
 
-            // Vérifie si l'email contient un @
-            var user = _userRepo.FindByEmail(email);
-            if (!email.Contains("@"))
-            {
-                AfficherErreur("Veuillez entrer un email valide !");
-                return;
-            }
-            // Vérifie si l'utilisateur existe
-            if (user == null)
-            {
-                AfficherErreur("Une erreur se produit");
-                return;
-            }
-            // Vérifie le mot de passe bcrypt
-            bool passwordOk = BCrypt.Net.BCrypt.Verify(password, user.Password);
+                if (user == null || !user.Roles.Contains("ROLE_ADMIN")
+                                 && !user.Roles.Contains("ROLE_COMPTABLE"))
+                {
+                    TxtErreur.Text = "Email ou mot de passe incorrect !";
+                    TxtErreur.Visibility = Visibility.Visible;
+                    return;
+                }
 
-            if (!passwordOk)
-            {
-                AfficherErreur("Email ou mot de passe incorrect !");
-                return;
+                new MainWindow(user).Show();
+                this.Close();
             }
-
-            
-            // Connexion réussie → ouvre MainWindow
-            var mainWindow = new MainWindow(user);
-            mainWindow.Show();
-            this.Close();
+            catch (MySqlException)
+            {
+                // Catch spécifique pour les erreurs de connexion à MySQL
+                MessageBox.Show(
+                    "Impossible de se connecter à la base de données !\n" +
+                    "Vérifiez que MySQL est bien démarré.",
+                    "Erreur de connexion",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Error);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Erreur : {ex.Message}", "Erreur",
+                                MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private void AfficherErreur(string message)
         {
-            txtErreur.Text = message;
-            txtErreur.Visibility = Visibility.Visible;
+            TxtErreur.Text = message;
+            TxtErreur.Visibility = Visibility.Visible;
         }
     }
 }
